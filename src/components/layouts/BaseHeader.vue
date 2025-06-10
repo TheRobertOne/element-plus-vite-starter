@@ -8,8 +8,10 @@ import { toggleDark } from '~/composables'
   <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
     <el-menu-item index="/">
       <div class="flex items-center justify-center gap-2">
-        <div class="text-xl" i-ep-element-plus />
-        <span>Element Plus</span>
+        <div class="text-xl">
+
+        </div>
+        <span>衫淘乐</span>
       </div>
     </el-menu-item>
     <el-sub-menu index="2">
@@ -57,9 +59,10 @@ import { toggleDark } from '~/composables'
     </el-menu-item>
 
     <el-menu-item h="full">
-      <a class="size-full flex items-center justify-center" :href="repository.url" target="_blank">
+      <!-- <a class="size-full flex items-center justify-center" :href="repository.url" target="_blank">
         <div i-ri-github-fill />
-      </a>
+      </a> -->
+      <img src="../../assets/logo.png" class="size-full flex items-center justify-center">
     </el-menu-item>
   </el-menu>
 </template>

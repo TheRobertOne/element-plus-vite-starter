@@ -25,37 +25,21 @@ function handleClose(key: string, keyPath: string[]) {
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-sub-menu index="1">
+    <el-sub-menu index="salary-calculation">
       <template #title>
         <el-icon>
           <Location />
         </el-icon>
-        <span>Navigator One</span>
+        <span>薪酬计算</span>
       </template>
       <el-menu-item-group>
-        <template #title>
-          <span>Group One</span>
-        </template>
-        <el-menu-item index="/nav/1/item-1">
-          item one
+        <el-menu-item index="/nav/salary-calculation/operation">
+          运营
         </el-menu-item>
         <el-menu-item index="1-2">
           item two
         </el-menu-item>
       </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">
-          item three
-        </el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title>
-          <span>item four</span>
-        </template>
-        <el-menu-item index="1-4-1">
-          item one
-        </el-menu-item>
-      </el-sub-menu>
     </el-sub-menu>
     <el-menu-item index="/nav/2">
       <el-icon>

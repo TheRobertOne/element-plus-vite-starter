@@ -28,11 +28,6 @@
                 <el-input-number v-model="scope.row.assemblyOrderQuantity" :min="0" size="small" :controls="false" />
             </template>
         </el-table-column>
-        <el-table-column label="总设计量">
-            <template #default="scope">
-                <el-input-number v-model="scope.row.totalDesignQuantity" :min="0" size="small" :controls="false" />
-            </template>
-        </el-table-column>
         <el-table-column label="总修图量">
             <template #default="scope">
                 <el-input-number v-model="scope.row.totalPhotoEditingVolume" :min="0" size="small" :controls="false" />
@@ -103,7 +98,6 @@ const month = ref('')
 const salaryItem = { 
     name: '', 
     assemblyOrderQuantity: null, 
-    totalDesignQuantity: null, 
     totalPhotoEditingVolume: null, 
     month: null, 
     basicSalary: null, 

@@ -122,7 +122,6 @@ export const unitPriceConfig = [
 export const DesignerXLSXHeaders = {
     name: '姓名', 
     assemblyOrderQuantity: '总成单量', 
-    totalDesignQuantity: '总设计量', 
     totalPhotoEditingVolume: '总修图量', 
     month: '月份', 
     basicSalary: '底薪', 

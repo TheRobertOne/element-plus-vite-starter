@@ -13,10 +13,10 @@ function basicSalaryMatch(storePerformance) {
 }
 
 // 设计单价计算
-function unitPrice(totalDesignQuantity) {
+function unitPrice(assemblyOrderQuantity) {
     const config = unitPriceConfig;
     for (const { threshold, salary } of config) {
-    if (totalDesignQuantity <= threshold) {
+    if (assemblyOrderQuantity <= threshold) {
       return salary;
     }
   }
@@ -24,25 +24,30 @@ function unitPrice(totalDesignQuantity) {
 }
 
 // 提成计算
-function commissionBonusCalc(totalDesignQuantity, totalPhotoEditingVolume) {
-    const designBonus = unitPrice(totalDesignQuantity) * totalDesignQuantity
+function commissionBonusCalc(assemblyOrderQuantity, totalPhotoEditingVolume) {
+    const designBonus = unitPrice(assemblyOrderQuantity) * assemblyOrderQuantity
     const photoEditing = totalPhotoEditingVolume * 4
     return designBonus + photoEditing
 }
 
 // 高产奖金计算
-function highYieldBonusCalc(month, totalDesignQuantity) {
+function highYieldBonusCalc(month, assemblyOrderQuantity) {
     const designerMonthType = DesignerMonthTypeMap.find(item => item.value === month)?.label || null;
-    if (designerMonthType === DesignerMonthType.peakSeason && totalDesignQuantity > 300) return 600
+    if (designerMonthType === DesignerMonthType.peakSeason && assemblyOrderQuantity > 300) return 600
     return 0
 }
 
 export function calcAll (month, salaryList) {
     salaryList.forEach(item => {
+        const designerMonthType = DesignerMonthTypeMap.find(item => item.value === month)?.label || null;
+        if (designerMonthType !== DesignerMonthType.peakSeason) {
+            item.flawlessBonus = 0
+        }
         item.month = monthMap.find(item => item.value === month)?.label || null;
         item.basicSalary = basicSalaryMatch(item.assemblyOrderQuantity)
-        item.commissionBonus = commissionBonusCalc(item.totalDesignQuantity, item.totalPhotoEditingVolume)
-        item.highYieldBonus = highYieldBonusCalc(month, item.totalDesignQuantity)
+        item.commissionBonus = commissionBonusCalc(item.assemblyOrderQuantity, item.totalPhotoEditingVolume)
+        item.highYieldBonus = highYieldBonusCalc(month, item.assemblyOrderQuantity)
+
         item.actualSalaryPaid = item.basicSalary + item.commissionBonus + item.highYieldBonus + item.flawlessBonus - item.deduction
     })
 }

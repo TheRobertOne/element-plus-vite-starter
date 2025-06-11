@@ -101,7 +101,7 @@
 import { reactive, ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import { CustomerServiceMonthOptions } from '../../../const/customer-service.ts'
-import { basicSalaryCalc, calcAll } from '../../../utils/customer-service.js'
+import { calcAll } from '../../../utils/customer-service.js'
 import { monthMap, PositionEnum } from '../../../const/const.ts'
 import { exportExcel } from '../../../utils/export-xlsx.js'
 

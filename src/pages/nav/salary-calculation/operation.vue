@@ -96,7 +96,19 @@ import { exportExcel } from '../../../utils/export-xlsx.js'
 
 const month = ref('')
 
-const salaryItem = { name: '', storePerformance: null, ROI: null, month: null, basicSalary: null, commissionRatioShow: null, commissionRatio: 0, commissionAmount: null, performanceBonus: null, ROIBonus: null, actualSalaryPaid: null }
+const salaryItem = { 
+  name: '', 
+  storePerformance: null, 
+  ROI: null, 
+  month: null, 
+  basicSalary: null, 
+  commissionRatioShow: null, 
+  commissionRatio: 0, 
+  commissionAmount: null, 
+  performanceBonus: null, 
+  ROIBonus: null, 
+  actualSalaryPaid: null 
+}
 
 const salaryList = reactive([JSON.parse(JSON.stringify(salaryItem))])
 

@@ -1,6 +1,7 @@
 import * as XLSX from 'xlsx'
 import { OperationXLSXHeaders } from '../const/operation.ts'
 import { CustomerXLSXHeaders } from '../const/customer-service.ts'
+import { DesignerXLSXHeaders } from '../const/designer.ts'
 import { PositionEnum, PositionArr } from '../const/const.ts'
 
 export const exportData = (position, data) => data.map(row => {
@@ -9,6 +10,8 @@ export const exportData = (position, data) => data.map(row => {
         XLSXHeaders = OperationXLSXHeaders
     } else if (position === PositionEnum.CustomerService) {
         XLSXHeaders = CustomerXLSXHeaders
+    } else if (position === PositionEnum.Designer) {
+        XLSXHeaders = DesignerXLSXHeaders
     }
     const newRow = {}
     for (const key in XLSXHeaders) {

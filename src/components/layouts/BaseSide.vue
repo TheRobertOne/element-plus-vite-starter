@@ -9,7 +9,6 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const activeMenu = route.path;
-console.log(5566, activeMenu)
 
 // const isCollapse = ref(true)
 function handleOpen(key: string, keyPath: string[]) {
@@ -46,6 +45,9 @@ function handleClose(key: string, keyPath: string[]) {
         </el-menu-item>
         <el-menu-item index="/nav/salary-calculation/customer-service">
           客服
+        </el-menu-item>
+        <el-menu-item index="/nav/salary-calculation/designer">
+          设计师
         </el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>

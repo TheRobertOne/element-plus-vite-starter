@@ -1,4 +1,5 @@
 import { baseSalaryConfig, customerPerformanceObjectivesMap } from '../const/customer-service.ts'
+import { monthMap } from '../const/const.ts'
 
 // 计算目标
 function basicSalaryMatch(storePerformance) {
@@ -33,6 +34,7 @@ export function basicSalaryCalc (storePerformance) {
 export function performanceCommissionCalc (month, salaryList) {
     const sorted = [...salaryList].sort((a, b) => b.storePerformance - a.storePerformance);
     salaryList.forEach(item => {
+        item.month = monthMap.find(item => item.value === month)?.label || null;
         item.basicSalary = basicSalaryCalc(item.storePerformance)
         const performanceRanking = sorted.findIndex(sortedItem => sortedItem === item) + 1;
         let basicCommissionRatio = 0.01;

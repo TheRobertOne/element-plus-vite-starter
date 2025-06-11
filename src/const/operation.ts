@@ -49,61 +49,10 @@ export const OperationMonthOptions = [
   },
 ]
 
-export const OperationMonthOptions1 = [
-  {
-    value: 'Jan',
-    label: '1月',
-  },
-  {
-    value: 'Feb',
-    label: '2月',
-  },
-  {
-    value: 'Mar',
-    label: '3月',
-  },
-  {
-    value: 'Apr',
-    label: '4月',
-  },
-  {
-    value: 'May',
-    label: '5月',
-  },
-  {
-    value: 'Jun',
-    label: '6月',
-  },
-  {
-    value: 'Jul',
-    label: '7月',
-  },
-  {
-    value: 'Aug',
-    label: '8月',
-  },
-  {
-    value: 'Sep',
-    label: '9月',
-  },
-  {
-    value: 'Oct',
-    label: '10月',
-  },
-  {
-    value: 'Nov',
-    label: '11月',
-  },
-  {
-    value: 'Dec',
-    label: '12月',
-  },
-]
-
-export const OperationMonthType = {
-    offSeason: 'off-season', // 淡季
-    averageSeason: 'average-season', // 平季
-    peakSeason: 'peak-season', // 旺季
+export const enum OperationMonthType {
+    offSeason = 'off-season', // 淡季
+    averageSeason = 'average-season', // 平季
+    peakSeason = 'peak-season', // 旺季
 }
 
 export const OperationMonthTypeMap = [

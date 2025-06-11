@@ -9,7 +9,7 @@
         style="width: 240px"
       >
         <el-option
-          v-for="item in OperationMonthOptions"
+          v-for="item in CustomerServiceMonthOptions"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -24,14 +24,9 @@
         <el-input v-model="scope.row.name" size="small" />
       </template>
     </el-table-column>
-    <el-table-column label="全店业绩">
+    <el-table-column label="业绩">
       <template #default="scope">
         <el-input-number v-model="scope.row.storePerformance" :min="0" size="small" :controls="false" />
-      </template>
-    </el-table-column>
-    <el-table-column label="投产比">
-      <template #default="scope">
-        <el-input-number v-model="scope.row.ROI" :min="0" size="small" :controls="false" />
       </template>
     </el-table-column>
     <el-table-column label="月份">
@@ -44,24 +39,40 @@
         {{ scope.row.basicSalary }}
       </template>
     </el-table-column>
-    <el-table-column label="提成比例">
+    <el-table-column label="排名">
       <template #default="scope">
-        {{ scope.row.commissionRatioShow }}
+        {{ scope.row.performanceRanking }}
       </template>
     </el-table-column>
+    <el-table-column label="基础提成点">
+      <template #default="scope">
+        {{ scope.row.basicCommissionRatioShow }}
+      </template>
+    </el-table-column>
+    <el-table-column label="超额提成点">
+      <template #default="scope">
+        {{ scope.row.excessCommissionRatio }}
+      </template>
+    </el-table-column>
+    <el-table-column label="最终提成点">
+      <template #default="scope">
+        {{ scope.row.finalCommissionRatio }}
+      </template>
+    </el-table-column>
+    
     <el-table-column label="提成金额">
       <template #default="scope">
         {{ scope.row.commissionAmount }}
       </template>
     </el-table-column>
-    <el-table-column label="业绩奖金">
+    <el-table-column label="团队奖金">
       <template #default="scope">
-        {{ scope.row.performanceBonus }}
+        {{ scope.row.teamBonus }}
       </template>
     </el-table-column>
-    <el-table-column label="ROI奖金">
+    <el-table-column label="优秀客服奖励">
       <template #default="scope">
-        {{ scope.row.ROIBonus }}
+        {{ scope.row.outstandingCustomerServiceReward }}
       </template>
     </el-table-column>
     <el-table-column label="实发工资">
@@ -89,14 +100,14 @@
 <script  lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { OperationMonthOptions } from '../../../const/operation.ts'
-import { basicSalaryCalc, commissionRatioCalc, commissionAmountCalc, performanceBonusCalc, ROIBonusCalc } from '../../../utils/operation.js'
+import { CustomerServiceMonthOptions } from '../../../const/customer-service.ts'
+import { basicSalaryCalc, calcAll } from '../../../utils/customer-service.js'
 import { monthMap, PositionEnum } from '../../../const/const.ts'
 import { exportExcel } from '../../../utils/export-xlsx.js'
 
 const month = ref('')
 
-const salaryItem = { name: '', storePerformance: null, ROI: null, month: null, basicSalary: null, commissionRatioShow: null, commissionRatio: 0, commissionAmount: null, performanceBonus: null, ROIBonus: null, actualSalaryPaid: null }
+const salaryItem = { name: '', storePerformance: null, month: null, basicSalary: null, performanceRanking: null,basicCommissionRatio: null, basicCommissionRatioShow: null, excessCommissionRatio: null, finalCommissionRatio: null, commissionAmount: null, teamBonus: null, outstandingCustomerServiceReward: null, actualSalaryPaid: null }
 
 const salaryList = reactive([JSON.parse(JSON.stringify(salaryItem))])
 
@@ -107,17 +118,8 @@ function calcBtnClink() {
     })
     return
   }
-  
-  salaryList.forEach(element => {
-    element.month = monthMap.find(item => item.value === month.value)?.label || null;
-    element.basicSalary = basicSalaryCalc(month.value, element.storePerformance)
-    element.commissionRatio = commissionRatioCalc(element.ROI)
-    element.commissionRatioShow = element.commissionRatio * 100 + '%'
-    element.commissionAmount = commissionAmountCalc(element.storePerformance, element.commissionRatio)
-    element.performanceBonus = performanceBonusCalc(month.value, element.storePerformance)
-    element.ROIBonus = ROIBonusCalc(element.ROI)
-    element.actualSalaryPaid = (element.basicSalary + element.commissionAmount + element.ROIBonus).toFixed(2)
-  });
+
+  calcAll(month.value, salaryList)
 }
 
 function addItem () {
@@ -131,7 +133,7 @@ function handleDelete (index) {
 }
 
 function exportAll () {
-  exportExcel(PositionEnum.Operation, salaryList)
+  exportExcel(PositionEnum.CustomerService, salaryList)
 }
 
 </script>
